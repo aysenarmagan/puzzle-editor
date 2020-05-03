@@ -37,9 +37,6 @@ function PuzzleTile({ name, puzzleId, showDelete }) {
   return (
     <Paper className={classes.root}>
       <div className={classes.top}>
-        <span className={classes.name} onClick={goToPuzzle}>
-          {name || "No Name"}
-        </span>
         {showDelete ? (
           <Tooltip title="delete">
             <IconButton onClick={deletePuzzle}>
@@ -47,6 +44,11 @@ function PuzzleTile({ name, puzzleId, showDelete }) {
             </IconButton>
           </Tooltip>
         ) : null}
+      </div>
+      <div className={classes.center}>
+        <span className={classes.name} onClick={goToPuzzle}>
+          {name || "No Name"}
+        </span>
       </div>
     </Paper>
   );
