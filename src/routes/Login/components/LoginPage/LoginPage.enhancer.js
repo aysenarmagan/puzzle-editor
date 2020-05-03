@@ -1,4 +1,4 @@
-import { UserIsNotAuthenticated } from 'utils/router'
+import { UserIsNotAuthenticated } from "utils/router";
 
-// redirect to /projects if user is already authed
-export default UserIsNotAuthenticated
+// redirect to /puzzles if user is already authed
+export default UserIsNotAuthenticated;

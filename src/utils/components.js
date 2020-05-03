@@ -1,8 +1,8 @@
-import { get, pick } from 'lodash'
-import { isLoaded, isEmpty } from 'react-redux-firebase'
-import LoadableComponent from 'react-loadable'
-import { mapProps, branch, renderComponent } from 'recompose'
-import LoadingSpinner from 'components/LoadingSpinner'
+import { get, pick } from "lodash";
+import { isLoaded, isEmpty } from "react-redux-firebase";
+import LoadableComponent from "react-loadable";
+import { mapProps, branch, renderComponent } from "recompose";
+import LoadingSpinner from "components/LoadingSpinner";
 
 /**
  * Show a loading spinner when a condition is truthy. Used within
@@ -11,7 +11,7 @@ import LoadingSpinner from 'components/LoadingSpinner'
  * @returns {HigherOrderComponent}
  */
 export function spinnerWhile(condition) {
-  return branch(condition, renderComponent(LoadingSpinner))
+  return branch(condition, renderComponent(LoadingSpinner));
 }
 
 /**
@@ -28,9 +28,9 @@ export function spinnerWhile(condition) {
  * import { firebaseConnect } from 'react-redux-firebase'
  *
  * const enhance = compose(
- *   firebaseConnect(() => ['projects']),
- *   connect(({ firebase: { data: { projects } } }) => ({ projects })),
- *   spinnerWhileLoading(['projects'])
+ *   firebaseConnect(() => ['puzzles']),
+ *   connect(({ firebase: { data: { puzzles } } }) => ({ puzzles })),
+ *   spinnerWhileLoading(['puzzles'])
  * )
  *
  * export default enhance(SomeComponent)
@@ -38,13 +38,13 @@ export function spinnerWhile(condition) {
 export function spinnerWhileLoading(propNames) {
   if (!propNames || !Array.isArray(propNames)) {
     const missingPropNamesErrMsg =
-      'spinnerWhileLoading requires propNames array'
-    console.error(missingPropNamesErrMsg) // eslint-disable-line no-console
-    throw new Error(missingPropNamesErrMsg)
+      "spinnerWhileLoading requires propNames array";
+    console.error(missingPropNamesErrMsg); // eslint-disable-line no-console
+    throw new Error(missingPropNamesErrMsg);
   }
-  return spinnerWhile(props =>
-    propNames.some(name => !isLoaded(get(props, name)))
-  )
+  return spinnerWhile((props) =>
+    propNames.some((name) => !isLoaded(get(props, name)))
+  );
 }
 
 /**
@@ -56,7 +56,7 @@ export function spinnerWhileLoading(propNames) {
  * @returns {HigherOrderComponent}
  */
 export function renderWhile(condition, component) {
-  return branch(condition, renderComponent(component))
+  return branch(condition, renderComponent(component));
 }
 
 /**
@@ -71,23 +71,23 @@ export function renderWhile(condition, component) {
  */
 export function renderWhileEmpty(propNames, component) {
   if (!propNames || !Array.isArray(propNames)) {
-    const missingPropNamesErrMsg = 'renderWhileEmpty requires propNames array'
-    console.error(missingPropNamesErrMsg) // eslint-disable-line no-console
-    throw new Error(missingPropNamesErrMsg)
+    const missingPropNamesErrMsg = "renderWhileEmpty requires propNames array";
+    console.error(missingPropNamesErrMsg); // eslint-disable-line no-console
+    throw new Error(missingPropNamesErrMsg);
   }
   return renderWhile(
     // Any of the listed prop name correspond to empty props (supporting dot path names)
-    props =>
-      propNames.some(propNames, name => {
-        const propValue = get(props, name)
+    (props) =>
+      propNames.some(propNames, (name) => {
+        const propValue = get(props, name);
         return (
           isLoaded(propValue) &&
           (isEmpty(propValue) ||
             (Array.isArray(propValue) && !Object.keys(propValue).length))
-        )
+        );
       }),
     component
-  )
+  );
 }
 
 /**
@@ -103,22 +103,22 @@ export function renderWhileEmpty(propNames, component) {
  * import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect'
  *
  * const enhance = compose(
- *   withProps(() => ({ projectName: 'test' })),
- *   logProps(['projectName']) // 'test' would be logged to console when SomeComponent is rendered
+ *   withProps(() => ({ puzzleName: 'test' })),
+ *   logProps(['puzzleName']) // 'test' would be logged to console when SomeComponent is rendered
  * )
  *
  * export default enhance(SomeComponent)
  */
-export function logProps(propNames, logName = '') {
-  return mapProps(ownerProps => {
+export function logProps(propNames, logName = "") {
+  return mapProps((ownerProps) => {
     /* eslint-disable no-console */
     console.log(
       `${logName} props:`,
       propNames ? pick(ownerProps, propNames) : ownerProps
-    )
+    );
     /* eslint-enable no-console */
-    return ownerProps
-  })
+    return ownerProps;
+  });
 }
 
 /**
@@ -131,6 +131,6 @@ export function logProps(propNames, logName = '') {
 export function Loadable(opts) {
   return LoadableComponent({
     loading: LoadingSpinner,
-    ...opts
-  })
+    ...opts,
+  });
 }

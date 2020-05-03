@@ -19,13 +19,13 @@ service cloud.firestore {
       allow write: if false; // only written to by indexUser cloud function
     }
 
-    // Projects
-    match /projects/{projectId} {
-      // Only projects you own can be viewed
+    // Puzzles
+    match /puzzles/{puzzleId} {
+      // Only puzzles you own can be viewed
       allow read, write: if isOwner(request.resource);
       // Rules apply to all child collections
       match /{allChildren=**} {
-        allow read, write: if isOwner(get(/databases/$(database)/documents/projects/$(projectId)));
+        allow read, write: if isOwner(get(/databases/$(database)/documents/puzzles/$(puzzleId)));
       }
     }
   }

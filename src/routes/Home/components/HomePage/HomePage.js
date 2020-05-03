@@ -1,21 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
+import React from "react";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   ACCOUNT_PATH,
   LIST_PATH,
   LOGIN_PATH,
-  SIGNUP_PATH
-} from 'constants/paths'
-import styles from './HomePage.styles'
+  SIGNUP_PATH,
+} from "constants/paths";
+import styles from "./HomePage.styles";
 
-const authWrapperUrl = 'https://github.com/mjrussell/redux-auth-wrapper'
-const reactRouterUrl = 'https://github.com/ReactTraining/react-router'
+const authWrapperUrl = "https://github.com/mjrussell/redux-auth-wrapper";
+const reactRouterUrl = "https://github.com/ReactTraining/react-router";
 
-const useStyles = makeStyles(styles)
+const useStyles = makeStyles(styles);
 
 function Home() {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -32,7 +32,8 @@ function Home() {
                 <a
                   href={reactRouterUrl}
                   target="_blank"
-                  rel="noopener noreferrer">
+                  rel="noopener noreferrer"
+                >
                   react-router
                 </a>
               </span>
@@ -40,7 +41,8 @@ function Home() {
               <a
                 href={authWrapperUrl}
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener noreferrer"
+              >
                 redux-auth-wrapper
               </a>
             </div>
@@ -54,7 +56,7 @@ function Home() {
           </span>
           <ul>
             <li>
-              <Link to={LIST_PATH}>Projects</Link>
+              <Link to={LIST_PATH}>Puzzles</Link>
             </li>
             <li>
               <Link to={ACCOUNT_PATH}>Account</Link>
@@ -64,7 +66,7 @@ function Home() {
         <div className={classes.section}>
           <h4>Logged In</h4>
           <span>
-            User is redirected to <pre>/projects</pre> if authenticated and
+            User is redirected to <pre>/puzzles</pre> if authenticated and
             trying to vist:
           </span>
           <ul>
@@ -85,7 +87,8 @@ function Home() {
                 <a
                   href={reactRouterUrl}
                   target="_blank"
-                  rel="noopener noreferrer">
+                  rel="noopener noreferrer"
+                >
                   redux-form
                 </a>
               </span>
@@ -98,7 +101,7 @@ function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
